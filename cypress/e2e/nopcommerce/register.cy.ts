@@ -2,6 +2,7 @@ import Header from "../../support/pageObjects/Header";
 
 import data from "../../fixtures/register.json";
 import RegisterPage from "../../support/pageObjects/Register.page";
+import utils from "../../support/utils";
 
 describe('Register Feature', () => {
 
@@ -55,5 +56,20 @@ describe('Register Feature', () => {
         RegisterPage.registerButton.click();
         cy.wait(1000);
         Header.pageTitle.should('have.text', data.pageTitle);
+    });
+
+    it.only('TC-3: Success sign up', () => {
+        Header.openPage("Register");
+        RegisterPage.firstNameField.type(data.firstName);
+        RegisterPage.lastNameField.type(data.lastName);
+        RegisterPage.emailField.type(utils.generateRandomEmail());
+        RegisterPage.passwordField.type(data.password);
+        RegisterPage.confirmPasswordField.type(data.password);
+        RegisterPage.registerButton.click();
+
+        RegisterPage.registerResult.then((result) => {
+            expect(result).to.be.visible;
+            expect(result).to.have.text(data.successRegisterMessage);
+        });
     });
 });

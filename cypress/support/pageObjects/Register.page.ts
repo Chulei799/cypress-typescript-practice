@@ -43,6 +43,10 @@ class RegisterPage {
     get confirmPasswordError() {
         return cy.get('#ConfirmPassword-error');
     }
+
+    get registerResult() {
+        return cy.get('.page-body > .result');
+    }
 }
 
 export default new RegisterPage();
