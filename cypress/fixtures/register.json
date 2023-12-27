@@ -1,0 +1,17 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "password": "password",
+  "shortPassword": "pass",
+  "anotherPassword": "loremipsum",
+  "correctEmail": "john.doe@gmail.com",
+  "incorrectEmail": "wrong.email",
+  "firstNameIsRequiredErrorMessage": "First name is required.",
+  "lastNameIsRequiredErrorMessage": "Last name is required.",
+  "emailIsRequiredErrorMessage": "Email is required.",
+  "passwordIsRequiredErrorMessage": "Password is required.",
+  "wrongEmailErrorMessage": "Wrong email",
+  "tooShortPasswordErrorMessage": "Password must meet the following rules: must have at least 6 characters",
+  "passwordNotMatchErrorMessage": "The password and confirmation password do not match.",
+  "pageTitle": "Register"
+}

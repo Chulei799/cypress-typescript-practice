@@ -6,4 +6,6 @@ export default defineConfig({
       // implement node event listeners here
     },
   },
+  viewportHeight: 800,
+  viewportWidth: 1600,
 });
