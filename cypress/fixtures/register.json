@@ -13,5 +13,6 @@
   "wrongEmailErrorMessage": "Wrong email",
   "tooShortPasswordErrorMessage": "Password must meet the following rules: must have at least 6 characters",
   "passwordNotMatchErrorMessage": "The password and confirmation password do not match.",
-  "pageTitle": "Register"
+  "pageTitle": "Register",
+  "successRegisterMessage": "Your registration completed"
 }
