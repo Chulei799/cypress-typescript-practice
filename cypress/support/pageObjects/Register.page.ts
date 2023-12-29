@@ -8,8 +8,24 @@ class RegisterPage {
         return cy.get('#LastName');
     }
 
+    get dateOfBirthDayField() {
+        return cy.get('.date-of-birth > .date-picker-wrapper').find('select').eq(0);
+    }
+
+    get dateOfBirthMonthField() {
+        return cy.get('.date-of-birth > .date-picker-wrapper').find('select').eq(1);
+    }
+
+    get dateOfBirthYearField() {
+        return cy.get('.date-of-birth > .date-picker-wrapper').find('select').eq(2);
+    }
+
     get emailField() {
         return cy.get('#Email');
+    }
+
+    get companyNameField() {
+        return cy.get('#Company');
     }
 
     get passwordField() {
@@ -46,6 +62,10 @@ class RegisterPage {
 
     get registerResult() {
         return cy.get('.page-body > .result');
+    }
+
+    selectGender(gender: "Male" | "Female") {
+        cy.get(`#gender-${gender.toLowerCase()}`).click();
     }
 }
 
