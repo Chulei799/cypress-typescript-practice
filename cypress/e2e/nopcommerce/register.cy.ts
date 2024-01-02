@@ -3,6 +3,8 @@ import Header from "../../support/pageObjects/Header";
 import data from "../../fixtures/register.json";
 import RegisterPage from "../../support/pageObjects/Register.page";
 import utils from "../../support/utils";
+import LoginPage from "../../support/pageObjects/Login.page";
+import CustomerInfoPage from "../../support/pageObjects/myAccountPages/CustomerInfo.page";
 
 describe('Register Feature', () => {
 
@@ -58,7 +60,7 @@ describe('Register Feature', () => {
         Header.pageTitle.should('have.text', data.pageTitle);
     });
 
-    it.only('TC-3: Success sign up', () => {
+    it('TC-3: Success sign up', () => {
         Header.openPage("Register");
         RegisterPage.firstNameField.type(data.firstName);
         RegisterPage.lastNameField.type(data.lastName);
@@ -71,5 +73,49 @@ describe('Register Feature', () => {
             expect(result).to.be.visible;
             expect(result).to.have.text(data.successRegisterMessage);
         });
+    });
+
+    it('TC-4: Check is user data save correct during registration', () => {
+        Header.openPage("Register");
+        const newUser = {
+            gender: "Male" as "Male" | "Female",
+            firstName: data.firstName,
+            lastName: data.lastName,
+            day: "31",
+            month: "12",
+            year: "1999",
+            email: utils.generateRandomEmail(),
+            companyName: "Feel Good Inc.",
+            password: data.password
+        }
+
+        RegisterPage.selectGender(newUser.gender);
+        RegisterPage.firstNameField.type(newUser.firstName);
+        RegisterPage.lastNameField.type(newUser.lastName);
+        RegisterPage.dateOfBirthDayField.select(newUser.day);
+        RegisterPage.dateOfBirthMonthField.select(newUser.month);
+        RegisterPage.dateOfBirthYearField.select(newUser.year);
+        RegisterPage.emailField.type(newUser.email);
+        RegisterPage.companyNameField.type(newUser.companyName);
+        RegisterPage.passwordField.type(data.password);
+        RegisterPage.confirmPasswordField.type(data.password);
+        RegisterPage.registerButton.click();
+
+        Header.openPage("Log in");
+
+        LoginPage.emailField.type(newUser.email);
+        LoginPage.passwordField.type(newUser.password);
+        LoginPage.loginButton.click();
+
+        Header.openPage("My account");
+        
+        CustomerInfoPage.getGenderRadioButton(newUser.gender).should('be.checked');
+        CustomerInfoPage.firstNameField.should('have.value', newUser.firstName);
+        CustomerInfoPage.lastNameField.should('have.value', newUser.lastName);
+        CustomerInfoPage.dateOfBirthDayField.should('have.value', newUser.day);
+        CustomerInfoPage.dateOfBirthMonthField.should('have.value', newUser.month);
+        CustomerInfoPage.dateOfBirthYearField.should('have.value', newUser.year);
+        CustomerInfoPage.emailField.should('have.value', newUser.email);
+        CustomerInfoPage.companyNameField.should('have.value', newUser.companyName);
     });
 });
